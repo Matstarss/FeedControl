@@ -63,12 +63,12 @@ namespace FeedControl
                     diaryItems.Add(firstWeight);
 
                     //첫 밥
-                    feedTime.Add("name", "feedsTime");
+                    feedTime.Add("name", "feedTime");
                     feedTime.Add("value", selectFeedTime);
                     diaryItems.Add(feedTime);
 
                     //마지막 밥
-                    lastFeedTime.Add("name", "lastFeedTime");
+                    lastFeedTime.Add("name", "lastfeedTime");
                     lastFeedTime.Add("value", selectLastFeedTime);
                     diaryItems.Add(lastFeedTime);
 

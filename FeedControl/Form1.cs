@@ -362,7 +362,26 @@ namespace FeedControl
         //생육단계 선택
         private void selectInstarName(object sender, EventArgs e)
         {
-            instarName = selectInstarBox.SelectedItem.ToString();
+            string name = selectInstarBox.SelectedItem.ToString();
+
+            if (name == "알")
+            {
+                instarName = "EGG";
+            }
+            else if (name == "유충")
+            {
+                instarName = "LARVA";
+            }
+            else if (name == "번데기")
+            {
+                instarName = "PUPA";
+            }
+            else if (name == "성충")
+            {
+                instarName = "IMAGO";
+            }
+
+            
         }
     }
 }
