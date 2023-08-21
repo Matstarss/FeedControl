@@ -31,9 +31,6 @@ namespace FeedControl
         {
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.selectFeedTimeBox = new System.Windows.Forms.ComboBox();
-            this.selectFeedNameBox = new System.Windows.Forms.ComboBox();
-            this.selectInstarBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -58,58 +55,12 @@ namespace FeedControl
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // selectFeedTimeBox
-            // 
-            this.selectFeedTimeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.selectFeedTimeBox.FormattingEnabled = true;
-            this.selectFeedTimeBox.Items.AddRange(new object[] {
-            "첫 밥",
-            "마지막 밥"});
-            this.selectFeedTimeBox.Location = new System.Drawing.Point(63, 412);
-            this.selectFeedTimeBox.Name = "selectFeedTimeBox";
-            this.selectFeedTimeBox.Size = new System.Drawing.Size(121, 20);
-            this.selectFeedTimeBox.TabIndex = 8;
-            this.selectFeedTimeBox.SelectedIndexChanged += new System.EventHandler(this.selectFeedTime);
-            // 
-            // selectFeedNameBox
-            // 
-            this.selectFeedNameBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.selectFeedNameBox.FormattingEnabled = true;
-            this.selectFeedNameBox.Items.AddRange(new object[] {
-            "발효톱밥",
-            "발효톱밥복합사료",
-            "밀기울",
-            "밀기울복합사료",
-            "뽕잎"});
-            this.selectFeedNameBox.Location = new System.Drawing.Point(234, 412);
-            this.selectFeedNameBox.Name = "selectFeedNameBox";
-            this.selectFeedNameBox.Size = new System.Drawing.Size(121, 20);
-            this.selectFeedNameBox.TabIndex = 9;
-            this.selectFeedNameBox.SelectedIndexChanged += new System.EventHandler(this.selectFeedName);
-            // 
-            // selectInstarBox
-            // 
-            this.selectInstarBox.FormattingEnabled = true;
-            this.selectInstarBox.Items.AddRange(new object[] {
-            "알",
-            "유충",
-            "번데기",
-            "성충"});
-            this.selectInstarBox.Location = new System.Drawing.Point(63, 356);
-            this.selectInstarBox.Name = "selectInstarBox";
-            this.selectInstarBox.Size = new System.Drawing.Size(121, 20);
-            this.selectInstarBox.TabIndex = 12;
-            this.selectInstarBox.SelectedIndexChanged += new System.EventHandler(this.selectInstarName);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(388, 466);
-            this.Controls.Add(this.selectInstarBox);
-            this.Controls.Add(this.selectFeedNameBox);
-            this.Controls.Add(this.selectFeedTimeBox);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -130,9 +81,6 @@ namespace FeedControl
 
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ComboBox selectFeedTimeBox;
-        private System.Windows.Forms.ComboBox selectFeedNameBox;
-        private System.Windows.Forms.ComboBox selectInstarBox;
     }
 }
 

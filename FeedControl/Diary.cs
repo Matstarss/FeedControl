@@ -54,12 +54,12 @@ namespace FeedControl
 
                     //사육상자 무게 (곤충 + 사료 상태에서 계측)
                     totalWeight.Add("name", "boxWeight");
-                    totalWeight.Add("value", measureTotalWeight);
+                    totalWeight.Add("value", measureTotalWeight * 10);
                     diaryItems.Add(totalWeight);
 
                     // 상자 내 사료 무게 (사육상자 무게 - 박스무게)
                     firstWeight.Add("name", "boxFeedWeight");
-                    firstWeight.Add("value", measureTotalWeight - 2000);
+                    firstWeight.Add("value", (measureTotalWeight* 10) - 2000);
                     diaryItems.Add(firstWeight);
 
                     //첫 밥

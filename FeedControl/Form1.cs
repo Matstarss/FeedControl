@@ -12,8 +12,6 @@ using AForge.Video.DirectShow;
 using System.IO;
 using System.Drawing.Imaging;
 using EasyModbus;
-using System.Net.Http;
-using Newtonsoft.Json.Linq;
 
 namespace FeedControl
 {
@@ -36,9 +34,6 @@ namespace FeedControl
         private int sendEndRfid = 0;
         private int checkFeedFinish = 0;
         private double firstWeight = 0, feedWeight = 0, totalWeight = 0;
-        private int feedTime = 0, lastFeedtime = 0;
-        private string feedName;
-        private string instarName;
 
 
 
@@ -178,9 +173,9 @@ namespace FeedControl
                 commandRfidRead = holdingRegister[0];
                 sendEndRfid = holdingRegister[1];
                 checkFeedFinish = holdingRegister[2];
-                firstWeight = holdingRegister[3] / 100;
-                feedWeight = holdingRegister[4] / 100;
-                totalWeight = holdingRegister[5] / 100;
+                firstWeight = holdingRegister[3];
+                feedWeight = holdingRegister[4];
+                totalWeight = holdingRegister[5];
 
 
                 //RFID 읽기 & 스냅샷 촬영
@@ -207,29 +202,11 @@ namespace FeedControl
                 //사육일지 작성
                 if (checkFeedFinish == 1)
                 {
-
-                    //입력값 확인 1
-                    if (feedTime + lastFeedtime != 1)
-                    {
-                        MessageBox.Show("첫 밥/마지막 밥 선택값이 없습니다.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                    //입력값 확인 2
-                    if (string.IsNullOrEmpty(feedName))
-                    {
-                        MessageBox.Show("사료 이름이 선택되지 않았습니다.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                    //입력값 확인 3
-                    if (string.IsNullOrEmpty(instarName))
-                    {
-                        MessageBox.Show("생육 단계가 선택되지 않았습니다.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
                     //TODO 급이에 맞는 API로 변경
-                    diary.updateDiary("FEED", cardreader.getCardNumber(), measureFirstWeight: firstWeight, measureFeedWeight: feedWeight, measureTotalWeight: totalWeight,
-                       selectInstarName : instarName, selectFeedTime: feedTime, selectLastFeedTime: lastFeedtime, selectFeedName : feedName);
-                    
+                    /*diary.updateDiary("FEED", cardreader.getCardNumber(), measureFirstWeight: firstWeight, measureFeedWeight: feedWeight, measureTotalWeight: totalWeight,
+                       selectInstarName: "갈색거저리", selectFeedTime: 0, selectLastFeedTime: 0, selectFeedName: "밀기울");*/
+
+                    diary.updateDiary("FEED", cardreader.getCardNumber(), "EGG", "밀기울", 1, 0, firstWeight, feedWeight, totalWeight);
                     WriteMeasureFinishRegisters();
                 }
 
@@ -299,7 +276,7 @@ namespace FeedControl
                 // 연결
                 if (!modbusClient.Connected)
                     modbusClient.Connect();
-                modbusClient.WriteSingleRegister(17, 0);
+                modbusClient.WriteSingleRegister(11, 0);
             }
             catch (Exception ex)
             {
@@ -324,64 +301,9 @@ namespace FeedControl
             }
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-
-       //첫밥 , 마지막밥 선택값 가져오기 
-        private void selectFeedTime(object sender, EventArgs e)
-        {
-            if (selectFeedTimeBox.SelectedItem.ToString() == "마지막 밥")
-            {
-                feedTime = 0;
-                lastFeedtime = 1;
-            }
-
-            else if (selectFeedTimeBox.SelectedItem.ToString() == "첫 밥")
-            {
-                feedTime = 1;
-                lastFeedtime = 0;
-            }
-            else
-            {
-                feedTime = 0;
-                lastFeedtime = 0;
-            }
-        }
-
-        //사료 이름 선택
-        private void selectFeedName(object sender, EventArgs e)
-        {
-            feedName = selectFeedNameBox.SelectedItem.ToString();
-        }
-
-
-        //생육단계 선택
-        private void selectInstarName(object sender, EventArgs e)
-        {
-            string name = selectInstarBox.SelectedItem.ToString();
-
-            if (name == "알")
-            {
-                instarName = "EGG";
-            }
-            else if (name == "유충")
-            {
-                instarName = "LARVA";
-            }
-            else if (name == "번데기")
-            {
-                instarName = "PUPA";
-            }
-            else if (name == "성충")
-            {
-                instarName = "IMAGO";
-            }
-
-            
         }
     }
 }
